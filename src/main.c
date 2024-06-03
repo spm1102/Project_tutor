@@ -1,7 +1,7 @@
 #include"gui.h"
 
 int main() {
-    cell_t (*grid)[ROWS] = GRID_Create();
+    cell_t** grid = GRID_Create();
 
     GUI_INIT(grid);
     GRID_Free(grid);

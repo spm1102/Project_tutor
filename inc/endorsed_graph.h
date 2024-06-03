@@ -36,7 +36,7 @@ struct graph_t
 
 typedef struct graph_t graph_t;
 
-graph_t *GRAPH_Create(cell_t grid[COLS][ROWS]);
+graph_t* GRAPH_Create(const cell_t** grid);
 void GRAPH_Free(graph_t *p_graph);
 void EDGE_Add(graph_t *p_graph, int src, int dest, int weight);
 void EDGE_Free(edge_t *p_edge);

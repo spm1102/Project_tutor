@@ -3,6 +3,6 @@
 
 #include "endorsed_graph.h"
 
-graph_t *GEN_GRAPH_Create(cell_t grid[COLS][ROWS]);
+graph_t* GEN_GRAPH_Create(const cell_t** grid);
 
 #endif

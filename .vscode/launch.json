@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "d:/TheFirstProgram/Project_tutor/src",
-      "program": "d:/TheFirstProgram/Project_tutor/src/build/Debug/outDebug",
+      "cwd": "d:/TheFirstProgram/Project_tutor",
+      "program": "d:/TheFirstProgram/Project_tutor/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [

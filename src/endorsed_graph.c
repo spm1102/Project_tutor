@@ -1,9 +1,9 @@
 #include "endorsed_graph.h"
 
-inline graph_t* GRAPH_Create(cell_t grid[COLS][ROWS]) {
+ graph_t* GRAPH_Create(const cell_t** grid) {
     graph_t* p_graph = (graph_t*)malloc(sizeof(graph_t));
 
-    int dest = TAKE_dest(grid);
+    int dest = TAKE_dest((const cell_t**) grid);
 
     p_graph->numVertices = NUM_VERTICES;
     for(int i = 0; i < COLS; i++) {
@@ -26,7 +26,7 @@ inline graph_t* GRAPH_Create(cell_t grid[COLS][ROWS]) {
     return p_graph;
 }
 
-inline int distance_measure(graph_t* p_graph, int source, int dest) {
+ int distance_measure(graph_t* p_graph, int source, int dest) {
     int xSRC = p_graph->vertices[source].x;
     int ySRC = p_graph->vertices[source].y;
     int xDES = p_graph->vertices[dest].x;
@@ -51,7 +51,7 @@ void GRAPH_Free(graph_t* p_graph) {
     free(p_graph);
 }
 
-inline void EDGE_Add(graph_t* p_graph, int src, int dest, int weight) {
+ void EDGE_Add(graph_t* p_graph, int src, int dest, int weight) {
     edge_t* p_edge_src = (edge_t*)malloc(sizeof(edge_t));
     p_edge_src->src = src;
     p_edge_src->dest = dest;
@@ -67,6 +67,6 @@ inline void EDGE_Add(graph_t* p_graph, int src, int dest, int weight) {
     p_graph->vertices[dest].edge = p_edge_dest;
 }
 
-inline void EDGE_Free(edge_t* p_edge) {
+ void EDGE_Free(edge_t* p_edge) {
     free(p_edge);
 }

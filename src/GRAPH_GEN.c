@@ -1,6 +1,6 @@
 #include "GRAPH_GEN.h"
 
-graph_t* GEN_GRAPH_Create(cell_t grid[COLS][ROWS]) {
+graph_t* GEN_GRAPH_Create(const cell_t** grid) {
 
     graph_t* p_graph = GRAPH_Create(grid);
     
@@ -20,7 +20,7 @@ graph_t* GEN_GRAPH_Create(cell_t grid[COLS][ROWS]) {
                     EDGE_Add(p_graph, currentVertex, topVertex, 1);
                 }
                 if (i < COLS - 1) {
-                    if(IS_wall(i + 1, j, grid)){
+                    if(IS_wall(i + 1, j, (const cell_t**)grid)){
                         continue;
                     }
                     int bottomVertex = grid[i + 1][j].vertex;

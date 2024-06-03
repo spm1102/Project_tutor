@@ -1,3 +1,4 @@
+#define RAYGUI_IMPLEMENTATION
 #include "gui.h"
 
 void CELL_Draw(cell_t cell){
@@ -20,7 +21,7 @@ bool INDEX_IsValid(int x, int y) {
 }
 
 
-inline void GUI_displayPath(graph_t* p_graph) {
+ void GUI_displayPath(graph_t* p_graph) {
     for(int i = 0; i < COLS; i++){
         for(int j = 0; j < ROWS; j++){
             if(p_graph->vertices[COLS * i + j].visited == true){
@@ -31,10 +32,10 @@ inline void GUI_displayPath(graph_t* p_graph) {
     }
 }
 
-inline void GUI_findShortestPath(cell_t (*grid)[ROWS]) {
-    graph_t* p_graph = GEN_GRAPH_Create(grid);
-    int source = TAKE_source(grid);
-    int dest = TAKE_dest(grid);
+ void GUI_findShortestPath(cell_t** grid) {
+    graph_t* p_graph = GEN_GRAPH_Create((const cell_t**)grid);
+    int source = TAKE_source((const cell_t**)grid);
+    int dest = TAKE_dest((const cell_t**)grid);
     a_star_queue(p_graph, source, dest, &GUI_displayPath);
     int currentVertex = dest; 
     int pathLength = 0;
@@ -49,7 +50,7 @@ inline void GUI_findShortestPath(cell_t (*grid)[ROWS]) {
     GRAPH_Free(p_graph);
 }
 
-void GUI_INIT(cell_t (*grid)[ROWS]) {
+void GUI_INIT(cell_t** grid) {
     InitWindow(screenWidth, screenHeight, "Algorithm");
     
     bool isDrawingWalls = false;

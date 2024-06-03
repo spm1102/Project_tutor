@@ -1,10 +1,18 @@
 #include "cell.h"
 
+const int screenWidth = 400;
+const int screenHeight = 400;
 
+const int cellWidth = screenWidth / COLS;
+const int cellHeight = screenHeight / ROWS;
 
-cell_t (*GRID_Create(void))[ROWS]
+cell_t **GRID_Create(void)
 {
-    cell_t(*grid)[ROWS] = malloc(sizeof(cell_t) * COLS * ROWS);
+    cell_t** grid = (cell_t **)malloc(ROWS * sizeof(cell_t *));
+    for (int i = 0; i < ROWS; i++)
+    {
+        grid[i] = (cell_t *)malloc(COLS * sizeof(cell_t));
+    }
     int vertexCount = 0;
     for (int i = 0; i < COLS; i++)
     {
@@ -24,12 +32,16 @@ cell_t (*GRID_Create(void))[ROWS]
     return grid;
 }
 
-inline void GRID_Free(cell_t (*grid)[ROWS])
+void GRID_Free(cell_t **grid)
 {
+    for (int i = 0; i < ROWS; i++)
+    {
+        free(grid[i]);
+    }
     free(grid);
 }
 
-bool IS_wall(int x, int y, cell_t grid[COLS][ROWS])
+bool IS_wall(int x, int y, const cell_t** grid)
 {
     if (grid[x][y].IS_containWall)
     {
@@ -38,7 +50,7 @@ bool IS_wall(int x, int y, cell_t grid[COLS][ROWS])
     return false;
 }
 
-inline int TAKE_source(cell_t grid[COLS][ROWS])
+int TAKE_source(const cell_t** grid)
 {
     int source;
     for (int i = 0; i < COLS; i++)
@@ -55,7 +67,7 @@ inline int TAKE_source(cell_t grid[COLS][ROWS])
     return source;
 }
 
-inline int TAKE_dest(cell_t grid[COLS][ROWS])
+int TAKE_dest(const cell_t** grid)
 {
     int dest;
     for (int i = 0; i < COLS; i++)

@@ -32,10 +32,10 @@ struct cell_t
 
 typedef struct cell_t cell_t;
 
-cell_t (*GRID_Create(void))[ROWS];
-void GRID_Free(cell_t (*grid)[ROWS]);
-bool IS_wall(int x, int y, cell_t grid[COLS][ROWS]);
-int TAKE_source(cell_t grid[COLS][ROWS]);
-int TAKE_dest(cell_t grid[COLS][ROWS]);
+cell_t** GRID_Create(void);
+void GRID_Free(cell_t** grid);
+bool IS_wall(int x, int y, const cell_t** grid);
+int TAKE_source(const cell_t** grid);
+int TAKE_dest(const cell_t** grid);
 
 #endif
