@@ -1,7 +1,7 @@
 #include "a_star.h"
 
 
-void a_star_queue(graph_t* p_graph, int startVertex, int destination, void (*GUI_displaypPath)(graph_t* p_graph)) {
+void a_star_queue(graph_t* p_graph, int startVertex, int destination, void (*GUI_displaypPath)(graph_t* p_graph), void (*GUI_displayError)(void)) {
     queue_t* p_queue = NULL;
     p_queue = QUEUE_Create();
     p_graph->vertices[startVertex].total_dist_to_src = 0;

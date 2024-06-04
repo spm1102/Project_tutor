@@ -20,11 +20,23 @@ bool INDEX_IsValid(int x, int y) {
     return x >= 0 && x < COLS && y >= 0 && y < ROWS;
 }
 
+void delay(int numberOfSeconds) {
+    int milliSeconds = 1000 * numberOfSeconds;
+    clock_t start_time = clock();
+    while (clock() < start_time + milliSeconds)
+        ;
+}
+
+void GUI_displayError(void) {
+    DrawRectangleRec((Rectangle){ 195, 195, 20, 20 }, GRAY);
+    DrawText("Find no path", 195, 195, 14, BLACK);
+}
 
  void GUI_displayPath(graph_t* p_graph) {
     for(int i = 0; i < COLS; i++){
         for(int j = 0; j < ROWS; j++){
             if(p_graph->vertices[COLS * i + j].visited == true){
+                // delay(TIME_DELAY_MILISECONDS);
                 DrawRectangle(i * cellWidth, j * cellHeight, cellWidth, cellHeight, GREEN);
             }
 
@@ -36,12 +48,16 @@ bool INDEX_IsValid(int x, int y) {
     graph_t* p_graph = GEN_GRAPH_Create((const cell_t**)grid);
     int source = TAKE_source((const cell_t**)grid);
     int dest = TAKE_dest((const cell_t**)grid);
-    a_star_queue(p_graph, source, dest, &GUI_displayPath);
+    a_star_queue(p_graph, source, dest, &GUI_displayPath, &GUI_displayError);
     int currentVertex = dest; 
     int pathLength = 0;
     int path[MAX_PATH_LENGTH];
     while(currentVertex != source) {
         path[pathLength++] = currentVertex;
+        if(p_graph->vertices[currentVertex].preVertex == -1) {
+            GUI_displayError();
+            break;
+        }
         currentVertex = p_graph->vertices[currentVertex].preVertex;
         int j = currentVertex % 10;
         int i = (currentVertex - j) / 10;
@@ -131,6 +147,7 @@ void GUI_INIT(cell_t** grid) {
             for(int i = 0; i < COLS; i++){
                 for(int j = 0; j < ROWS; j++){
                     if(grid[i][j].IS_inPath){
+                        //delay(TIME_DELAY_MILISECONDS);
                         DrawRectangle(i * cellWidth, j * cellHeight, cellWidth, cellHeight, GRAY);
                     }
                 }

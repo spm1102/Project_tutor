@@ -3,6 +3,6 @@
 
 #include "a_star_queue.h"
 
-void a_star_queue(graph_t *p_graph, int startVertex, int destination, void (*GUI_displaypPath)(graph_t *p_graph));
+void a_star_queue(graph_t *p_graph, int startVertex, int destination, void (*GUI_displaypPath)(graph_t *p_graph), void (*GUI_displayError)(void));
 
 #endif
