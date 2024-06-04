@@ -36,12 +36,14 @@ void GUI_displayError(void) {
     for(int i = 0; i < COLS; i++){
         for(int j = 0; j < ROWS; j++){
             if(p_graph->vertices[COLS * i + j].visited == true){
-                // delay(TIME_DELAY_MILISECONDS);
+                BeginDrawing();
                 DrawRectangle(i * cellWidth, j * cellHeight, cellWidth, cellHeight, GREEN);
+                EndDrawing();
             }
-
         }
     }
+
+    BeginDrawing();
 }
 
  void GUI_findShortestPath(cell_t** grid) {
@@ -143,7 +145,7 @@ void GUI_INIT(cell_t** grid) {
         }
 
         if(isAlgorithmRunning) {
-            isAlgorithmRunning = false;
+            // isAlgorithmRunning = false;
             for(int i = 0; i < COLS; i++){
                 for(int j = 0; j < ROWS; j++){
                     if(grid[i][j].IS_inPath){
