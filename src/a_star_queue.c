@@ -9,9 +9,9 @@ queue_t *QUEUE_Create(void)
     return p_queue;
 }
 
-void QUEUE_Put(queue_t *p_queue, int vertex, int dist, graph_t *p_graph)
+void QUEUE_Put(queue_t *p_queue, int vertex, double dist, graph_t *p_graph)
 {
-    int heuristic_dist = p_graph->vertices[vertex].heuristic_dist;
+    double heuristic_dist = p_graph->vertices[vertex].heuristic_dist;
     node_heap_t *p_node = NODE_HEAP_Create(vertex, dist, heuristic_dist);
     if (p_queue->front == NULL || dist + heuristic_dist < p_queue->front->total_dist_to_src)
     {
@@ -32,14 +32,14 @@ void QUEUE_Put(queue_t *p_queue, int vertex, int dist, graph_t *p_graph)
     }
 }
 
-node_heap_t *QUEUE_Get(queue_t *p_queue)
+node_heap_t *QUEUE_Get(queue_t *p_queue, graph_t *p_graph)
 {
     if (p_queue->front == NULL)
     {
         return NULL;
     }
-
-    node_heap_t *p_node = NODE_HEAP_Create(p_queue->front->vertexName, p_queue->front->total_dist_to_src, 0);
+    int vertex = p_queue->front->vertexName;
+    node_heap_t *p_node = NODE_HEAP_Create(vertex, p_queue->front->total_dist_to_src, p_graph->vertices[vertex].heuristic_dist);
     node_heap_t *temp = p_queue->front;
     p_queue->front = p_queue->front->next;
 

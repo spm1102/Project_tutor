@@ -31,7 +31,7 @@ graph_t *GRAPH_Create(const cell_t **grid)
     return p_graph;
 }
 
-int distance_measure(graph_t *p_graph, int source, int dest)
+double distance_measure(graph_t *p_graph, int source, int dest)
 {
     int xSRC = p_graph->vertices[source].x;
     int ySRC = p_graph->vertices[source].y;
@@ -40,7 +40,7 @@ int distance_measure(graph_t *p_graph, int source, int dest)
     int dx = (xSRC - xDES) * (xSRC - xDES);
     int dy = (ySRC - yDES) * (ySRC - yDES);
 
-    return (int)sqrt(dx + dy); // Euclidean distance
+    return sqrt(dx + dy); // Euclidean distance
 }
 
 void GRAPH_Free(graph_t *p_graph)

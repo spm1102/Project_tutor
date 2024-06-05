@@ -21,8 +21,8 @@ struct vertex_t
 {
     int x, y;
     int visited;
-    int heuristic_dist;
-    int total_dist_to_src;
+    double heuristic_dist;
+    double total_dist_to_src;
     int preVertex;
     edge_t *edge;
 };
@@ -40,6 +40,6 @@ graph_t* GRAPH_Create(const cell_t** grid);
 void GRAPH_Free(graph_t *p_graph);
 void EDGE_Add(graph_t *p_graph, int src, int dest, int weight);
 void EDGE_Free(edge_t *p_edge);
-int distance_measure(graph_t *p_graph, int source, int dest);
+double distance_measure(graph_t *p_graph, int source, int dest);
 
 #endif

@@ -8,7 +8,7 @@ void a_star_queue(graph_t *p_graph, int startVertex, int destination, void (*GUI
     QUEUE_Put(p_queue, startVertex, 0, p_graph);
     while (p_queue->front != NULL)
     {
-        node_heap_t *minNode = QUEUE_Get(p_queue);
+        node_heap_t *minNode = QUEUE_Get(p_queue, p_graph);
         int currentVertex = minNode->vertexName;
         NODE_HEAP_Free(minNode);
 
