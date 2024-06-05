@@ -6,7 +6,7 @@
 struct node_heap_t
 {
     int vertexName;
-    int real_dist;
+    double real_dist;
     double total_dist_to_src;
     struct node_heap_t *next;
 };

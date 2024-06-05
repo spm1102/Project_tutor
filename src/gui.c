@@ -108,13 +108,13 @@ void GUI_INIT(cell_t **grid)
         if (isDrawingWalls)
         {
             Vector2 mPos = GetMousePosition();
-            int inX = mPos.x / cellWidth;
-            int inY = mPos.y / cellHeight;
+            int inX = (int)mPos.x / cellWidth;
+            int inY = (int)mPos.y / cellHeight;
             Rectangle bound;
-            bound.x = grid[inX][inY].x * cellWidth;
-            bound.y = grid[inX][inY].y * cellHeight;
-            bound.width = cellWidth;
-            bound.height = cellHeight;
+            bound.x = (float)(grid[inX][inY].x * cellWidth);
+            bound.y = (float)(grid[inX][inY].y * cellHeight);
+            bound.width = (float)cellWidth;
+            bound.height = (float)cellHeight;
             if (INDEX_IsValid(inX, inY) && CheckCollisionPointRec(mPos, bound))
             {
                 grid[inX][inY].IS_containWall = true;
@@ -123,8 +123,8 @@ void GUI_INIT(cell_t **grid)
         else if (IsMouseButtonPressed(MOUSE_BUTTON_RIGHT))
         {
             Vector2 mPos2 = GetMousePosition();
-            int inX = mPos2.x / cellWidth;
-            int inY = mPos2.y / cellHeight;
+            int inX = (int)mPos2.x / cellWidth;
+            int inY = (int)mPos2.y / cellHeight;
 
             if (INDEX_IsValid(inX, inY))
             {

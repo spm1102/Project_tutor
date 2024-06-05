@@ -32,7 +32,7 @@ void a_star_queue(graph_t *p_graph, int startVertex, int destination, void (*GUI
 
             if (!p_graph->vertices[nextVertex].visited)
             {
-                int newDist = p_graph->vertices[currentVertex].total_dist_to_src + weight;
+                double newDist = p_graph->vertices[currentVertex].total_dist_to_src + weight;
                 if (newDist < p_graph->vertices[nextVertex].total_dist_to_src)
                 {
                     p_graph->vertices[nextVertex].total_dist_to_src = newDist;
