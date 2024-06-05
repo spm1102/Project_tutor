@@ -1,41 +1,50 @@
 #define RAYGUI_IMPLEMENTATION
 #include "gui.h"
 
-void CELL_Draw(cell_t cell){
-    if(cell.IS_containWall){
+void CELL_Draw(cell_t cell)
+{
+    if (cell.IS_containWall)
+    {
         DrawRectangle(cell.x * cellWidth, cell.y * cellHeight, cellWidth, cellHeight, YELLOW);
     }
-    else if(cell.IS_source){
+    else if (cell.IS_source)
+    {
         DrawRectangle(cell.x * cellWidth, cell.y * cellHeight, cellWidth, cellHeight, RED);
     }
-    else if(cell.IS_dest){
+    else if (cell.IS_dest)
+    {
         DrawRectangle(cell.x * cellWidth, cell.y * cellHeight, cellWidth, cellHeight, BLUE);
     }
-    
-    DrawRectangleLines(cell.x * cellWidth, cell.y * cellHeight, cellWidth, cellHeight, BLACK);
 
+    DrawRectangleLines(cell.x * cellWidth, cell.y * cellHeight, cellWidth, cellHeight, BLACK);
 }
 
-bool INDEX_IsValid(int x, int y) {
+bool INDEX_IsValid(int x, int y)
+{
     return x >= 0 && x < COLS && y >= 0 && y < ROWS;
 }
 
-void delay(int numberOfSeconds) {
-    int milliSeconds = 1000 * numberOfSeconds;
-    clock_t start_time = clock();
-    while (clock() < start_time + milliSeconds)
-        ;
-}
+// void delay(int numberOfSeconds) {
+//     int milliSeconds = 1000 * numberOfSeconds;
+//     clock_t start_time = clock();
+//     while (clock() < start_time + milliSeconds)
+//         ;
+// }
 
-void GUI_displayError(void) {
-    DrawRectangleRec((Rectangle){ 195, 195, 20, 20 }, GRAY);
+void GUI_displayError(void)
+{
+    DrawRectangleRec((Rectangle){195, 195, 20, 20}, GRAY);
     DrawText("Find no path", 195, 195, 14, BLACK);
 }
 
- void GUI_displayPath(graph_t* p_graph) {
-    for(int i = 0; i < COLS; i++){
-        for(int j = 0; j < ROWS; j++){
-            if(p_graph->vertices[COLS * i + j].visited == true){
+void GUI_displayPath(graph_t *p_graph)
+{
+    for (int i = 0; i < COLS; i++)
+    {
+        for (int j = 0; j < ROWS; j++)
+        {
+            if (p_graph->vertices[COLS * i + j].visited == true)
+            {
                 BeginDrawing();
                 DrawRectangle(i * cellWidth, j * cellHeight, cellWidth, cellHeight, GREEN);
                 EndDrawing();
@@ -46,17 +55,20 @@ void GUI_displayError(void) {
     BeginDrawing();
 }
 
- void GUI_findShortestPath(cell_t** grid) {
-    graph_t* p_graph = GEN_GRAPH_Create((const cell_t**)grid);
-    int source = TAKE_source((const cell_t**)grid);
-    int dest = TAKE_dest((const cell_t**)grid);
+void GUI_findShortestPath(cell_t **grid)
+{
+    graph_t *p_graph = GEN_GRAPH_Create((const cell_t **)grid);
+    int source = TAKE_source((const cell_t **)grid);
+    int dest = TAKE_dest((const cell_t **)grid);
     a_star_queue(p_graph, source, dest, &GUI_displayPath, &GUI_displayError);
-    int currentVertex = dest; 
+    int currentVertex = dest;
     int pathLength = 0;
     int path[MAX_PATH_LENGTH];
-    while(currentVertex != source) {
+    while (currentVertex != source)
+    {
         path[pathLength++] = currentVertex;
-        if(p_graph->vertices[currentVertex].preVertex == -1) {
+        if (p_graph->vertices[currentVertex].preVertex == -1)
+        {
             GUI_displayError();
             break;
         }
@@ -68,9 +80,10 @@ void GUI_displayError(void) {
     GRAPH_Free(p_graph);
 }
 
-void GUI_INIT(cell_t** grid) {
+void GUI_INIT(cell_t **grid)
+{
     InitWindow(screenWidth, screenHeight, "Algorithm");
-    
+
     bool isDrawingWalls = false;
     bool hasSource = false;
     bool hasDest = false;
@@ -81,14 +94,19 @@ void GUI_INIT(cell_t** grid) {
 
     bool isAlgorithmRunning = false;
 
-    while(!WindowShouldClose()) {
-        if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
+    while (!WindowShouldClose())
+    {
+        if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
+        {
             isDrawingWalls = true;
-        } else if (IsMouseButtonReleased(MOUSE_BUTTON_LEFT)) {
+        }
+        else if (IsMouseButtonReleased(MOUSE_BUTTON_LEFT))
+        {
             isDrawingWalls = false;
         }
 
-        if(isDrawingWalls) {
+        if (isDrawingWalls)
+        {
             Vector2 mPos = GetMousePosition();
             int inX = mPos.x / cellWidth;
             int inY = mPos.y / cellHeight;
@@ -97,27 +115,35 @@ void GUI_INIT(cell_t** grid) {
             bound.y = grid[inX][inY].y * cellHeight;
             bound.width = cellWidth;
             bound.height = cellHeight;
-            if(INDEX_IsValid(inX, inY) && CheckCollisionPointRec(mPos, bound)) {
+            if (INDEX_IsValid(inX, inY) && CheckCollisionPointRec(mPos, bound))
+            {
                 grid[inX][inY].IS_containWall = true;
             }
         }
-        else if(IsMouseButtonPressed(MOUSE_BUTTON_RIGHT)) {
+        else if (IsMouseButtonPressed(MOUSE_BUTTON_RIGHT))
+        {
             Vector2 mPos2 = GetMousePosition();
             int inX = mPos2.x / cellWidth;
             int inY = mPos2.y / cellHeight;
 
-            if (INDEX_IsValid(inX, inY)) {
-                if (!hasSource) {
+            if (INDEX_IsValid(inX, inY))
+            {
+                if (!hasSource)
+                {
                     hasSource = true;
                     sourceX = inX;
                     sourceY = inY;
                     grid[inX][inY].IS_source = true;
-                } else if (!hasDest) {
+                }
+                else if (!hasDest)
+                {
                     hasDest = true;
                     destX = inX;
                     destY = inY;
                     grid[inX][inY].IS_dest = true;
-                } else {
+                }
+                else
+                {
                     // Clear previous source and destination
                     grid[sourceX][sourceY].IS_source = false;
                     grid[destX][destY].IS_dest = false;
@@ -131,25 +157,32 @@ void GUI_INIT(cell_t** grid) {
 
         ClearBackground(RAYWHITE);
 
-        //GuiToggleGroup((Rectangle){0, 0 , cellWidth, cellHeight}, "BFS; Dijkstra; A Star", &ToggleGroup001Active);
+        // GuiToggleGroup((Rectangle){0, 0 , cellWidth, cellHeight}, "BFS; Dijkstra; A Star", &ToggleGroup001Active);
 
-        for(int i = 0; i < COLS; i++){
-            for(int j = 0; j < ROWS; j++){
+        for (int i = 0; i < COLS; i++)
+        {
+            for (int j = 0; j < ROWS; j++)
+            {
                 CELL_Draw(grid[i][j]);
             }
         }
 
-        if(IsKeyPressed(KEY_ENTER) && sourceX != -1 && sourceY != -1 && destX != -1 && destY != -1 ){
+        if (IsKeyPressed(KEY_ENTER) && sourceX != -1 && sourceY != -1 && destX != -1 && destY != -1)
+        {
             isAlgorithmRunning = true;
             GUI_findShortestPath(grid);
         }
 
-        if(isAlgorithmRunning) {
+        if (isAlgorithmRunning)
+        {
             // isAlgorithmRunning = false;
-            for(int i = 0; i < COLS; i++){
-                for(int j = 0; j < ROWS; j++){
-                    if(grid[i][j].IS_inPath){
-                        //delay(TIME_DELAY_MILISECONDS);
+            for (int i = 0; i < COLS; i++)
+            {
+                for (int j = 0; j < ROWS; j++)
+                {
+                    if (grid[i][j].IS_inPath)
+                    {
+                        // delay(TIME_DELAY_MILISECONDS);
                         DrawRectangle(i * cellWidth, j * cellHeight, cellWidth, cellHeight, GRAY);
                     }
                 }
@@ -157,7 +190,6 @@ void GUI_INIT(cell_t** grid) {
         }
         EndDrawing();
     }
-
 
     CloseWindow();
 }
