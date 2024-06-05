@@ -33,8 +33,10 @@ bool INDEX_IsValid(int x, int y)
 
 void GUI_displayError(void)
 {
+    BeginDrawing();
     DrawRectangleRec((Rectangle){195, 195, 20, 20}, GRAY);
     DrawText("Find no path", 195, 195, 14, BLACK);
+    EndDrawing();
 }
 
 void GUI_displayPath(graph_t *p_graph)
@@ -60,7 +62,7 @@ void GUI_findShortestPath(cell_t **grid)
     graph_t *p_graph = GEN_GRAPH_Create((const cell_t **)grid);
     int source = TAKE_source((const cell_t **)grid);
     int dest = TAKE_dest((const cell_t **)grid);
-    a_star_queue(p_graph, source, dest, &GUI_displayPath, &GUI_displayError);
+    a_star_queue(p_graph, source, dest, &GUI_displayPath);
     int currentVertex = dest;
     int pathLength = 0;
     int path[MAX_PATH_LENGTH];
