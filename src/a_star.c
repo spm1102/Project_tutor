@@ -4,7 +4,7 @@ void a_star_queue(graph_t *p_graph, int startVertex, int destination, void (*GUI
 {
     queue_t *p_queue = NULL;
     p_queue = QUEUE_Create();
-    p_graph->vertices[startVertex].total_dist_to_src = 0;
+    p_graph->vertices[startVertex].total_dist = 0;
     QUEUE_Put(p_queue, startVertex, 0, p_graph);
     while (p_queue->front != NULL)
     {
@@ -32,10 +32,10 @@ void a_star_queue(graph_t *p_graph, int startVertex, int destination, void (*GUI
 
             if (!p_graph->vertices[nextVertex].visited)
             {
-                double newDist = p_graph->vertices[currentVertex].total_dist_to_src + weight;
-                if (newDist < p_graph->vertices[nextVertex].total_dist_to_src)
+                double newDist = p_graph->vertices[currentVertex].total_dist + weight;
+                if (newDist < p_graph->vertices[nextVertex].total_dist)
                 {
-                    p_graph->vertices[nextVertex].total_dist_to_src = newDist;
+                    p_graph->vertices[nextVertex].total_dist = newDist;
                     p_graph->vertices[nextVertex].preVertex = currentVertex;
                     QUEUE_Put(p_queue, nextVertex, newDist, p_graph);
                 }

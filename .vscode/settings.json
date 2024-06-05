@@ -66,6 +66,7 @@
   "C_Cpp_Runner.msvcSecureNoWarnings": false,
   "files.associations": {
     "a_star_node.h": "c",
-    "a_star.h": "c"
+    "a_star.h": "c",
+    "endorsed_graph.h": "c"
   }
 }

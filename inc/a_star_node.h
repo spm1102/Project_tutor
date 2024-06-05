@@ -7,7 +7,8 @@ struct node_heap_t
 {
     int vertexName;
     double real_dist;
-    double total_dist_to_src;
+    double heuristic_dist;
+    double total_dist;
     struct node_heap_t *next;
 };
 

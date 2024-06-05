@@ -9,7 +9,8 @@ node_heap_t *NODE_HEAP_Create(int vertex, double dist, double heuristic_dist)
     }
     p_node_heap->vertexName = vertex;
     p_node_heap->real_dist = dist;
-    p_node_heap->total_dist_to_src = heuristic_dist + dist;
+    p_node_heap->heuristic_dist = heuristic_dist;
+    p_node_heap->total_dist = dist;
     p_node_heap->next = NULL;
 
     return p_node_heap;

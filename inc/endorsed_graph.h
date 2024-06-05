@@ -22,7 +22,7 @@ struct vertex_t
     int x, y;
     int visited;
     double heuristic_dist;
-    double total_dist_to_src;
+    double total_dist;
     int preVertex;
     edge_t *edge;
 };

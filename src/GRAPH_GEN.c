@@ -5,12 +5,21 @@ graph_t *GEN_GRAPH_Create(const cell_t **grid)
 
     graph_t *p_graph = GRAPH_Create(grid);
 
+    bool EDGE_Added[COLS][ROWS];
+    for (int i = 0; i < COLS; i++)
+    {
+        for (int j = 0; j < ROWS; j++)
+        {
+            EDGE_Added[i][j] = false;
+        }
+    }
+
     for (int i = 0; i < COLS; i++)
     {
         for (int j = 0; j < ROWS; j++)
         {
             int currentVertex = grid[i][j].vertex;
-
+            EDGE_Added[i][j] = true;
             // Add edges to the adjacent vertices
             if (!IS_wall(i, j, grid))
             {
@@ -22,16 +31,22 @@ graph_t *GEN_GRAPH_Create(const cell_t **grid)
                         continue;
                     }
                     int topVertex = grid[i - 1][j].vertex;
-                    EDGE_Add(p_graph, currentVertex, topVertex, 1);
+                    if(EDGE_Added[i - 1][j] == false)
+                    {
+                        EDGE_Add(p_graph, currentVertex, topVertex, 1);
+                    }
                 }
                 if (i < COLS - 1)
                 {
-                    if (IS_wall(i + 1, j, (const cell_t **)grid))
+                    if (IS_wall(i + 1, j, grid))
                     {
                         continue;
                     }
                     int bottomVertex = grid[i + 1][j].vertex;
-                    EDGE_Add(p_graph, currentVertex, bottomVertex, 1);
+                    if(EDGE_Added[i + 1][j] == false)
+                    {
+                        EDGE_Add(p_graph, currentVertex, bottomVertex, 1);
+                    }
                 }
                 if (j > 0)
                 {
@@ -40,7 +55,10 @@ graph_t *GEN_GRAPH_Create(const cell_t **grid)
                         continue;
                     }
                     int leftVertex = grid[i][j - 1].vertex;
-                    EDGE_Add(p_graph, currentVertex, leftVertex, 1);
+                    if(EDGE_Added[i][j - 1] == false)
+                    {
+                        EDGE_Add(p_graph, currentVertex, leftVertex, 1);
+                    }
                 }
                 if (j < ROWS - 1)
                 {
@@ -49,7 +67,10 @@ graph_t *GEN_GRAPH_Create(const cell_t **grid)
                         continue;
                     }
                     int rightVertex = grid[i][j + 1].vertex;
-                    EDGE_Add(p_graph, currentVertex, rightVertex, 1);
+                    if(EDGE_Added[i][j + 1] == false)
+                    {
+                        EDGE_Add(p_graph, currentVertex, rightVertex, 1);
+                    }
                 }
             }
         }

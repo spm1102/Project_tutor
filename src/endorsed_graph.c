@@ -14,7 +14,7 @@ graph_t *GRAPH_Create(const cell_t **grid)
             p_graph->vertices[COLS * i + j].x = grid[i][j].x;
             p_graph->vertices[COLS * i + j].y = grid[i][j].y;
             p_graph->vertices[COLS * i + j].visited = 0;
-            p_graph->vertices[COLS * i + j].total_dist_to_src = INT_MAX;
+            p_graph->vertices[COLS * i + j].total_dist = INT_MAX;
             p_graph->vertices[COLS * i + j].preVertex = -1;
             p_graph->vertices[COLS * i + j].edge = NULL;
         }

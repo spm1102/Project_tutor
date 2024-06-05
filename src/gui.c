@@ -64,11 +64,8 @@ void GUI_findShortestPath(cell_t **grid)
     int dest = TAKE_dest((const cell_t **)grid);
     a_star_queue(p_graph, source, dest, &GUI_displayPath);
     int currentVertex = dest;
-    int pathLength = 0;
-    int path[MAX_PATH_LENGTH];
     while (currentVertex != source)
     {
-        path[pathLength++] = currentVertex;
         if (p_graph->vertices[currentVertex].preVertex == -1)
         {
             GUI_displayError();

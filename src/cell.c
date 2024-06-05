@@ -14,9 +14,9 @@ cell_t **GRID_Create(void)
         grid[i] = (cell_t *)malloc(COLS * sizeof(cell_t));
     }
     int vertexCount = 0;
-    for (int i = 0; i < COLS; i++)
+    for (int i = 0; i < ROWS; i++)
     {
-        for (int j = 0; j < ROWS; j++)
+        for (int j = 0; j < COLS; j++)
         {
             grid[i][j].vertex = vertexCount++;
             grid[i][j].x = i;
