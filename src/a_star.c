@@ -17,10 +17,6 @@ void a_star_queue(graph_t *p_graph, int startVertex, int destination, void (*GUI
             break;
         }
 
-        // if (p_graph->vertices[currentVertex].visited)
-        // {
-        //     continue;
-        // }
         p_graph->vertices[currentVertex].visited = 1;
         GUI_displaypPath(p_graph);
 
