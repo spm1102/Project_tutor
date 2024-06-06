@@ -21,56 +21,27 @@ graph_t *GEN_GRAPH_Create(const cell_t **grid)
             int currentVertex = grid[i][j].vertex;
             EDGE_Added[i][j] = true;
             // Add edges to the adjacent vertices
-            if (!IS_wall(i, j, grid))
-            {
 
-                if (i > 0)
+            if(!IS_wall(i, j, grid)) {
+                if (i > 0 && !IS_wall(i - 1, j, grid) && EDGE_Added[i - 1][j] == false)
                 {
-                    if (IS_wall(i - 1, j, grid))
-                    {
-                        continue;
-                    }
                     int topVertex = grid[i - 1][j].vertex;
-                    if(EDGE_Added[i - 1][j] == false)
-                    {
-                        EDGE_Add(p_graph, currentVertex, topVertex, 1);
-                    }
+                    EDGE_Add(p_graph, currentVertex, topVertex, 1);
                 }
-                if (i < COLS - 1)
+                if (i < COLS - 1 && !IS_wall(i + 1, j, grid) && EDGE_Added[i + 1][j] == false)
                 {
-                    if (IS_wall(i + 1, j, grid))
-                    {
-                        continue;
-                    }
                     int bottomVertex = grid[i + 1][j].vertex;
-                    if(EDGE_Added[i + 1][j] == false)
-                    {
-                        EDGE_Add(p_graph, currentVertex, bottomVertex, 1);
-                    }
+                    EDGE_Add(p_graph, currentVertex, bottomVertex, 1);
                 }
-                if (j > 0)
+                if (j > 0 && !IS_wall(i, j - 1, grid) && EDGE_Added[i][j - 1] == false)
                 {
-                    if (IS_wall(i, j - 1, grid))
-                    {
-                        continue;
-                    }
                     int leftVertex = grid[i][j - 1].vertex;
-                    if(EDGE_Added[i][j - 1] == false)
-                    {
-                        EDGE_Add(p_graph, currentVertex, leftVertex, 1);
-                    }
+                    EDGE_Add(p_graph, currentVertex, leftVertex, 1);
                 }
-                if (j < ROWS - 1)
+                if (j < ROWS - 1 && !IS_wall(i, j + 1, grid) && EDGE_Added[i][j + 1] == false)
                 {
-                    if (IS_wall(i, j + 1, grid))
-                    {
-                        continue;
-                    }
                     int rightVertex = grid[i][j + 1].vertex;
-                    if(EDGE_Added[i][j + 1] == false)
-                    {
-                        EDGE_Add(p_graph, currentVertex, rightVertex, 1);
-                    }
+                    EDGE_Add(p_graph, currentVertex, rightVertex, 1);
                 }
             }
         }
