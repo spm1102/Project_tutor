@@ -17,10 +17,10 @@ void a_star_queue(graph_t *p_graph, int startVertex, int destination, void (*GUI
             break;
         }
 
-        if (p_graph->vertices[currentVertex].visited)
-        {
-            continue;
-        }
+        // if (p_graph->vertices[currentVertex].visited)
+        // {
+        //     continue;
+        // }
         p_graph->vertices[currentVertex].visited = 1;
         GUI_displaypPath(p_graph);
 
@@ -33,11 +33,12 @@ void a_star_queue(graph_t *p_graph, int startVertex, int destination, void (*GUI
             if (!p_graph->vertices[nextVertex].visited)
             {
                 double newDist = p_graph->vertices[currentVertex].total_dist + weight;
-                if (newDist < p_graph->vertices[nextVertex].total_dist)
+                double heuristic_of_nextVertex = p_graph->vertices[nextVertex].heuristic_dist;
+                if (newDist + heuristic_of_nextVertex < p_graph->vertices[nextVertex].total_dist + heuristic_of_nextVertex)
                 {
                     p_graph->vertices[nextVertex].total_dist = newDist;
                     p_graph->vertices[nextVertex].preVertex = currentVertex;
-                    QUEUE_Put(p_queue, nextVertex, newDist, p_graph);
+                    QUEUE_Put(p_queue, nextVertex, newDist + heuristic_of_nextVertex, p_graph);
                 }
             }
             temp = temp->next;
