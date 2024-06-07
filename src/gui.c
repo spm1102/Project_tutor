@@ -45,7 +45,7 @@ void GUI_displayPath(graph_t *p_graph, cell_t** grid)
     {
         for (int j = 0; j < ROWS; j++)
         {
-            if (p_graph->vertices[COLS * i + j].visited == true && grid[i][j].IS_source == false)
+            if (p_graph->vertices[COLS * i + j].visited == true && grid[i][j].IS_source == false && grid[i][j].IS_dest == false)
             {
                 BeginDrawing();
                 DrawRectangle(i * cellWidth, j * cellHeight, cellWidth, cellHeight, GREEN);
@@ -180,7 +180,7 @@ void GUI_INIT(cell_t **grid)
             {
                 for (int j = 0; j < ROWS; j++)
                 {
-                    if (grid[i][j].IS_inPath)
+                    if (grid[i][j].IS_inPath && grid[i][j].IS_source == false)
                     {
                         // delay(TIME_DELAY_MILISECONDS);
                         DrawRectangle(i * cellWidth, j * cellHeight, cellWidth, cellHeight, GRAY);

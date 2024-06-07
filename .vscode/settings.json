@@ -68,6 +68,7 @@
     "a_star_node.h": "c",
     "a_star.h": "c",
     "endorsed_graph.h": "c",
-    "gui.h": "c"
+    "gui.h": "c",
+    "cell.h": "c"
   }
 }
