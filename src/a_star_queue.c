@@ -13,7 +13,7 @@ void QUEUE_Put(queue_t *p_queue, int vertex, double dist, graph_t *p_graph)
 {
     double heuristic_dist = p_graph->vertices[vertex].heuristic_dist;
     node_heap_t *p_node = NODE_HEAP_Create(vertex, dist, heuristic_dist);
-    if (p_queue->front == NULL || dist + heuristic_dist < p_queue->front->total_dist)
+    if (p_queue->front == NULL || dist + heuristic_dist < p_queue->front->total_dist + p_queue->front->heuristic_dist)
     {
         p_node->next = p_queue->front;
         p_queue->front = p_node;
@@ -22,7 +22,7 @@ void QUEUE_Put(queue_t *p_queue, int vertex, double dist, graph_t *p_graph)
     {
         node_heap_t *curr = p_queue->front;
         node_heap_t *pre = NULL;
-        while (curr != NULL && dist + heuristic_dist >= curr->total_dist)
+        while (curr != NULL && dist + heuristic_dist >= curr->total_dist + curr->heuristic_dist)
         {
             pre = curr;
             curr = curr->next;

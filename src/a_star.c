@@ -1,6 +1,6 @@
 #include "a_star.h"
 
-void a_star_queue(graph_t *p_graph, int startVertex, int destination, void (*GUI_displaypPath)(graph_t *p_graph))
+void a_star_queue(graph_t *p_graph, cell_t** grid, int startVertex, int destination, void (*GUI_displaypPath)(graph_t *p_graph, cell_t** grid))
 {
     queue_t *p_queue = NULL;
     p_queue = QUEUE_Create();
@@ -18,7 +18,7 @@ void a_star_queue(graph_t *p_graph, int startVertex, int destination, void (*GUI
         }
 
         p_graph->vertices[currentVertex].visited = 1;
-        GUI_displaypPath(p_graph);
+        GUI_displaypPath(p_graph, grid);
 
         edge_t *temp = p_graph->vertices[currentVertex].edge;
         while (temp != NULL)
@@ -34,7 +34,7 @@ void a_star_queue(graph_t *p_graph, int startVertex, int destination, void (*GUI
                 {
                     p_graph->vertices[nextVertex].total_dist = newDist;
                     p_graph->vertices[nextVertex].preVertex = currentVertex;
-                    QUEUE_Put(p_queue, nextVertex, newDist + heuristic_of_nextVertex, p_graph);
+                    QUEUE_Put(p_queue, nextVertex, newDist, p_graph);
                 }
             }
             temp = temp->next;

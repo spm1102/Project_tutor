@@ -13,7 +13,7 @@ void CELL_Draw(cell_t cell);
 bool INDEX_IsValid(int x, int y);
 void delay(int numberOfSeconds);
 void GUI_displayError(void);
-void GUI_displayPath(graph_t *p_graph);
+void GUI_displayPath(graph_t *p_graph, cell_t** grid);
 void GUI_findShortestPath(cell_t** grid);
 void GUI_INIT(cell_t** grid);
 
