@@ -1,5 +1,5 @@
-#ifndef QUEUE_H
-#define QUEUE_H
+#ifndef A_STAR_QUEUE_H
+#define A_STAR_QUEUE_H
 
 #include "a_star_node.h"
 

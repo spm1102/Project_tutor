@@ -24,13 +24,6 @@ bool INDEX_IsValid(int x, int y)
     return x >= 0 && x < COLS && y >= 0 && y < ROWS;
 }
 
-// void delay(int numberOfSeconds) {
-//     int milliSeconds = 1000 * numberOfSeconds;
-//     clock_t start_time = clock();
-//     while (clock() < start_time + milliSeconds)
-//         ;
-// }
-
 void GUI_displayError(void)
 {
     BeginDrawing();
@@ -39,7 +32,7 @@ void GUI_displayError(void)
     EndDrawing();
 }
 
-void GUI_displayPath(graph_t *p_graph, cell_t** grid)
+void GUI_displayPath(graph_t *p_graph, cell_t **grid)
 {
     for (int i = 0; i < COLS; i++)
     {
@@ -63,7 +56,18 @@ void GUI_findShortestPath(cell_t **grid)
     graph_t *p_graph = GEN_GRAPH_Create((const cell_t **)grid);
     int source = TAKE_source((const cell_t **)grid);
     int dest = TAKE_dest((const cell_t **)grid);
-    a_star_queue(p_graph, grid, source, dest, &GUI_displayPath);
+    if (IsKeyDown(KEY_B))
+    {
+        BFS(p_graph, grid, source, dest, &GUI_displayPath);
+    }
+    else if (IsKeyDown(KEY_D))
+    {
+        dijkstra(p_graph, grid, source, dest, &GUI_displayPath);
+    }
+    else if (IsKeyDown(KEY_A))
+    {
+        a_star_queue(p_graph, grid, source, dest, &GUI_displayPath);
+    }
     int currentVertex = dest;
     while (currentVertex != source)
     {
@@ -157,8 +161,6 @@ void GUI_INIT(cell_t **grid)
 
         ClearBackground(RAYWHITE);
 
-        // GuiToggleGroup((Rectangle){0, 0 , cellWidth, cellHeight}, "BFS; Dijkstra; A Star", &ToggleGroup001Active);
-
         for (int i = 0; i < COLS; i++)
         {
             for (int j = 0; j < ROWS; j++)
@@ -182,7 +184,6 @@ void GUI_INIT(cell_t **grid)
                 {
                     if (grid[i][j].IS_inPath && grid[i][j].IS_source == false)
                     {
-                        // delay(TIME_DELAY_MILISECONDS);
                         DrawRectangle(i * cellWidth, j * cellHeight, cellWidth, cellHeight, GRAY);
                         DrawRectangleLines(i * cellWidth, j * cellHeight, cellWidth, cellHeight, BLACK);
                     }
