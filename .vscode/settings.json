@@ -69,6 +69,8 @@
     "a_star.h": "c",
     "endorsed_graph.h": "c",
     "gui.h": "c",
-    "cell.h": "c"
+    "cell.h": "c",
+    "dijkstra_node.h": "c",
+    "dijkstra.h": "c"
   }
 }

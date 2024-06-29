@@ -11,6 +11,11 @@ void dijkstra(graph_t *p_graph, cell_t **grid, int startVertex, int destination,
         int currentVertex = minNode->vertex;
         NODE_Free(minNode);
 
+         if (currentVertex == destination)
+        {
+            break;
+        }
+
         if (p_graph->vertices[currentVertex].visited)
         {
             continue;
