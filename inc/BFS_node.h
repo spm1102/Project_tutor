@@ -3,15 +3,15 @@
 
 #include"GRAPH_GEN.h"
 
-struct node_t {
+struct BFS_node_t {
     int vertex;
-    struct node_t* next;
+    struct BFS_node_t* next;
 };
 
-typedef struct node_t node_t;
+typedef struct BFS_node_t BFS_node_t;
 
 
-node_t* NODE_Create(int ver);
-void NODE_Free(node_t* p_node);
+BFS_node_t* BFS_NODE_Create(int ver);
+void BFS_NODE_Free(BFS_node_t* p_node);
 
 #endif

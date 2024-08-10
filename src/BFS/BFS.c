@@ -1,12 +1,12 @@
 #include "BFS.h"
 
 void BFS(graph_t* p_graph, cell_t** grid,int startVertex, int destination, void (*GUI_displayPath)(graph_t* p_graph, cell_t **grid)) {
-    queue_t* p_queue = QUEUE_Create();
-    QUEUE_Put(p_queue, startVertex);
+    BFS_queue_t* p_queue = BFS_QUEUE_Create();
+    BFS_QUEUE_Put(p_queue, startVertex);
     while(p_queue->front != NULL){
-        node_t* minNode = QUEUE_Get(p_queue);
+        BFS_node_t* minNode = BFS_QUEUE_Get(p_queue);
         int currentVertex = minNode->vertex;
-        NODE_Free(minNode);
+        BFS_NODE_Free(minNode);
         if(currentVertex == destination){
             break;
         }
@@ -22,10 +22,10 @@ void BFS(graph_t* p_graph, cell_t** grid,int startVertex, int destination, void 
             int nextVertex = temp->dest;
             if(!p_graph->vertices[nextVertex].visited){
                 p_graph->vertices[nextVertex].preVertex = currentVertex;
-                QUEUE_Put(p_queue, nextVertex);
+                BFS_QUEUE_Put(p_queue, nextVertex);
             }
             temp = temp->next;
         }
     }
-    QUEUE_Free(p_queue);
+    BFS_QUEUE_Free(p_queue);
 }

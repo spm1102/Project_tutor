@@ -6,12 +6,12 @@
 typedef struct {
     node_t* front;
     node_t* rear;
-} queue_t;
+} BFS_queue_t;
 
 
-queue_t* QUEUE_Create(void);
-void QUEUE_Put(queue_t* p_queue, int vertex);
-node_t* QUEUE_Get(queue_t* p_queue);
-void QUEUE_Free(queue_t* p_queue);
+BFS_queue_t* BFS_QUEUE_Create(void);
+void BFS_QUEUE_Put(BFS_queue_t* p_queue, int vertex);
+node_t* BFS_QUEUE_Get(BFS_queue_t* p_queue);
+void BFS_QUEUE_Free(BFS_queue_t* p_queue);
 
 #endif
