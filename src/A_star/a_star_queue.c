@@ -1,15 +1,15 @@
 #include "a_star_queue.h"
 
-queue_t *QUEUE_Create(void)
+A_STAR_queue_t *A_STAR_QUEUE_Create(void)
 {
-    queue_t *p_queue = (queue_t *)malloc(sizeof(queue_t));
+    A_STAR_queue_t *p_queue = (A_STAR_queue_t *)malloc(sizeof(A_STAR_queue_t));
 
     p_queue->front = NULL;
     p_queue->rear = NULL;
     return p_queue;
 }
 
-void QUEUE_Put(queue_t *p_queue, int vertex, double dist, graph_t *p_graph)
+void A_STAR_QUEUE_Put(A_STAR_queue_t *p_queue, int vertex, double dist, graph_t *p_graph)
 {
     double heuristic_dist = p_graph->vertices[vertex].heuristic_dist;
     node_heap_t *p_node = NODE_HEAP_Create(vertex, dist, heuristic_dist);
@@ -32,7 +32,7 @@ void QUEUE_Put(queue_t *p_queue, int vertex, double dist, graph_t *p_graph)
     }
 }
 
-node_heap_t *QUEUE_Get(queue_t *p_queue, graph_t *p_graph)
+node_heap_t *A_STAR_QUEUE_Get(A_STAR_queue_t *p_queue, graph_t *p_graph)
 {
     if (p_queue->front == NULL)
     {
@@ -52,7 +52,7 @@ node_heap_t *QUEUE_Get(queue_t *p_queue, graph_t *p_graph)
     return p_node;
 }
 
-void QUEUE_Free(queue_t *p_queue)
+void A_STAR_QUEUE_Free(A_STAR_queue_t *p_queue)
 {
     p_queue->front = NULL;
     p_queue->rear = NULL;

@@ -3,17 +3,17 @@
 
 #include "a_star_node.h"
 
-struct queue_t
+struct A_STAR_queue_t
 {
     node_heap_t *front;
     node_heap_t *rear;
 };
 
-typedef struct queue_t queue_t;
+typedef struct A_STAR_queue_t A_STAR_queue_t;
 
-queue_t *QUEUE_Create(void);
-void QUEUE_Put(queue_t *p_queue, int vertex, double dist, graph_t *p_graph);
-node_heap_t *QUEUE_Get(queue_t *p_queue, graph_t *p_graph);
-void QUEUE_Free(queue_t *p_queue);
+A_STAR_queue_t *A_STAR_QUEUE_Create(void);
+void A_STAR_QUEUE_Put(A_STAR_queue_t *p_queue, int vertex, double dist, graph_t *p_graph);
+node_heap_t *A_STAR_QUEUE_Get(A_STAR_queue_t *p_queue, graph_t *p_graph);
+void A_STAR_QUEUE_Free(A_STAR_queue_t *p_queue);
 
 #endif

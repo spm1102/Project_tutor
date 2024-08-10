@@ -2,13 +2,13 @@
 
 void a_star_queue(graph_t *p_graph, cell_t** grid, int startVertex, int destination, void (*GUI_displaypPath)(graph_t *p_graph, cell_t** grid))
 {
-    queue_t *p_queue = NULL;
-    p_queue = QUEUE_Create();
+    A_STAR_queue_t *p_queue = NULL;
+    p_queue = A_STAR_QUEUE_Create();
     p_graph->vertices[startVertex].total_dist = 0;
-    QUEUE_Put(p_queue, startVertex, 0, p_graph);
+    A_STAR_QUEUE_Put(p_queue, startVertex, 0, p_graph);
     while (p_queue->front != NULL)
     {
-        node_heap_t *minNode = QUEUE_Get(p_queue, p_graph);
+        node_heap_t *minNode = A_STAR_QUEUE_Get(p_queue, p_graph);
         int currentVertex = minNode->vertexName;
         NODE_HEAP_Free(minNode);
 
@@ -34,11 +34,11 @@ void a_star_queue(graph_t *p_graph, cell_t** grid, int startVertex, int destinat
                 {
                     p_graph->vertices[nextVertex].total_dist = newDist;
                     p_graph->vertices[nextVertex].preVertex = currentVertex;
-                    QUEUE_Put(p_queue, nextVertex, newDist, p_graph);
+                    A_STAR_QUEUE_Put(p_queue, nextVertex, newDist, p_graph);
                 }
             }
             temp = temp->next;
         }
     }
-    QUEUE_Free(p_queue);
+    A_STAR_QUEUE_Free(p_queue);
 }
