@@ -11,8 +11,8 @@ struct DIJKSTRA_queue_t
 
 typedef struct DIJKSTRA_queue_t DIJKSTRA_queue_t;
 
-static DIJKSTRA_queue_t *DIJKSTRA_QUEUE_Create(void);
-static void DIJKSTRA_QUEUE_Put(DIJKSTRA_queue_t *p_queue, int vertex, int dist);
-static DIJKSTRA_node_t *DIJKSTRA_QUEUE_Get(DIJKSTRA_queue_t *p_queue);
-static void DIJKSTRA_QUEUE_Free(DIJKSTRA_queue_t *p_queue);
+DIJKSTRA_queue_t *DIJKSTRA_QUEUE_Create(void);
+void DIJKSTRA_QUEUE_Put(DIJKSTRA_queue_t *p_queue, int vertex, int dist);
+DIJKSTRA_node_t *DIJKSTRA_QUEUE_Get(DIJKSTRA_queue_t *p_queue);
+void DIJKSTRA_QUEUE_Free(DIJKSTRA_queue_t *p_queue);
 #endif

@@ -8,7 +8,7 @@ BFS_queue_t* BFS_QUEUE_Create(void){
 }
 
 void BFS_QUEUE_Put(BFS_queue_t* p_queue, int vertex){
-    BFS_node_t* p_node = NODE_Create(vertex);
+    BFS_node_t* p_node = BFS_NODE_Create(vertex);
     if(p_queue->rear == NULL){
         p_queue->front = p_node;
         p_queue->rear = p_node;
@@ -24,7 +24,7 @@ BFS_node_t* BFS_QUEUE_Get(BFS_queue_t* p_queue){
     if(p_queue->front == NULL){
         return NULL;
     }
-    BFS_node_t* p_node = NODE_Create(p_queue->front->vertex);
+    BFS_node_t* p_node = BFS_NODE_Create(p_queue->front->vertex);
     BFS_node_t* temp = p_queue->front;
     p_queue->front = p_queue->front->next;
 
@@ -32,7 +32,7 @@ BFS_node_t* BFS_QUEUE_Get(BFS_queue_t* p_queue){
         p_queue->rear = NULL;
     }
 
-    NODE_Free(temp);
+    BFS_NODE_Free(temp);
     return p_node;
 }
 

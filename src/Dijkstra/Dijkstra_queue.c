@@ -10,7 +10,7 @@ DIJKSTRA_queue_t *DIJKSTRA_QUEUE_Create(void)
 
 void DIJKSTRA_QUEUE_Put(DIJKSTRA_queue_t *p_queue, int vertex, int dist)
 {
-    DIJKSTRA_node_t *p_node = NODE_Create(vertex, dist);
+    DIJKSTRA_node_t *p_node = DIJKSTRA_NODE_Create(vertex, dist);
     if (p_queue->front == NULL || dist < p_queue->front->total_dist)
     {
         p_node->next = p_queue->front;
@@ -36,7 +36,7 @@ DIJKSTRA_node_t *DIJKSTRA_QUEUE_Get(DIJKSTRA_queue_t *p_queue)
     {
         return NULL;
     }
-    DIJKSTRA_node_t *p_node = NODE_Create(p_queue->front->vertex, p_queue->front->total_dist);
+    DIJKSTRA_node_t *p_node = DIJKSTRA_NODE_Create(p_queue->front->vertex, p_queue->front->total_dist);
     DIJKSTRA_node_t *temp = p_queue->front;
     p_queue->front = p_queue->front->next;
 
@@ -44,7 +44,7 @@ DIJKSTRA_node_t *DIJKSTRA_QUEUE_Get(DIJKSTRA_queue_t *p_queue)
     {
         p_queue->rear = NULL;
     }
-    NODE_Free(temp);
+    DIJKSTRA_NODE_Free(temp);
     return p_node;
 }
 
