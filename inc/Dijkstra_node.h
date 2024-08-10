@@ -3,15 +3,15 @@
 
 #include "GRAPH_GEN.h"
 
-struct node_t {
+struct DIJKSTRA_node_t {
     int vertex;
     int total_dist;
-    struct node_t* next;
+    struct DIJKSTRA_node_t* next;
 };
 
-typedef struct node_t node_t;
+typedef struct DIJKSTRA_node_t DIJKSTRA_node_t;
 
-node_t* NODE_Create(int vertex, int dist);
-void NODE_Free(node_t* p_node);
+DIJKSTRA_node_t* DIJKSTRA_NODE_Create(int vertex, int dist);
+void DIJKSTRA_NODE_Free(DIJKSTRA_node_t* p_node);
 
 #endif

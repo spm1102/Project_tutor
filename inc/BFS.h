@@ -3,6 +3,6 @@
 
 #include"BFS_queue.h"
 
-static void BFS(graph_t* p_graph, cell_t** grid,int startVertex, int destination, void (*GUI_displayPath)(graph_t* p_graph, cell_t **grid));
+void BFS(graph_t* p_graph, cell_t** grid,int startVertex, int destination, void (*GUI_displayPath)(graph_t* p_graph, cell_t **grid));
 
 #endif

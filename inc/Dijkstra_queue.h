@@ -3,16 +3,16 @@
 
 #include "Dijkstra_node.h"
 
-struct queue_t
+struct DIJKSTRA_queue_t
 {
-    node_t *front;
-    node_t *rear;
+    DIJKSTRA_node_t *front;
+    DIJKSTRA_node_t *rear;
 };
 
-typedef struct queue_t queue_t;
+typedef struct DIJKSTRA_queue_t DIJKSTRA_queue_t;
 
-static queue_t *QUEUE_Create(void);
-static void QUEUE_Put(queue_t *p_queue, int vertex, int dist);
-static node_t *QUEUE_Get(queue_t *p_queue);
-static void QUEUE_Free(queue_t *p_queue);
+static DIJKSTRA_queue_t *DIJKSTRA_QUEUE_Create(void);
+static void DIJKSTRA_QUEUE_Put(DIJKSTRA_queue_t *p_queue, int vertex, int dist);
+static DIJKSTRA_node_t *DIJKSTRA_QUEUE_Get(DIJKSTRA_queue_t *p_queue);
+static void DIJKSTRA_QUEUE_Free(DIJKSTRA_queue_t *p_queue);
 #endif

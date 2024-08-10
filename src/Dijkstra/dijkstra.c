@@ -1,15 +1,15 @@
 #include "dijkstra.h"
 void dijkstra(graph_t *p_graph, cell_t **grid, int startVertex, int destination, void (*GUI_displayPath)(graph_t *p_graph, cell_t **grid))
 {
-    queue_t *p_queue = NULL;
-    p_queue = QUEUE_Create();
+    DIJKSTRA_queue_t *p_queue = NULL;
+    p_queue = DIJKSTRA_QUEUE_Create();
     p_graph->vertices[startVertex].total_dist = 0;
-    QUEUE_Put(p_queue, startVertex, 0);
+    DIJKSTRA_QUEUE_Put(p_queue, startVertex, 0);
     while (p_queue->front != NULL)
     {
-        node_t *minNode = QUEUE_Get(p_queue);
+        DIJKSTRA_node_t *minNode = DIJKSTRA_QUEUE_Get(p_queue);
         int currentVertex = minNode->vertex;
-        NODE_Free(minNode);
+        DIJKSTRA_NODE_Free(minNode);
 
          if (currentVertex == destination)
         {
@@ -36,11 +36,11 @@ void dijkstra(graph_t *p_graph, cell_t **grid, int startVertex, int destination,
                 {
                     p_graph->vertices[nextVertex].total_dist = new_dist;
                     p_graph->vertices[nextVertex].preVertex = currentVertex;
-                    QUEUE_Put(p_queue, nextVertex, new_dist);
+                    DIJKSTRA_QUEUE_Put(p_queue, nextVertex, new_dist);
                 }
             }
             temp = temp->next;
         }
     }
-    QUEUE_Free(p_queue);
+    DIJKSTRA_QUEUE_Free(p_queue);
 }
