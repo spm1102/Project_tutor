@@ -32,6 +32,26 @@ cell_t **GRID_Create(void)
     return grid;
 }
 
+void GRID_Reset(cell_t **grid)
+{
+    int vertexCount = 0;
+    for (int i = 0; i < ROWS; i++)
+    {
+        for (int j = 0; j < COLS; j++)
+        {
+            grid[i][j].vertex = vertexCount++;
+            grid[i][j].x = i;
+            grid[i][j].y = j;
+            grid[i][j].IS_visited = false;
+            grid[i][j].IS_containWall = false;
+            grid[i][j].IS_dest = false;
+            grid[i][j].IS_source = false;
+            grid[i][j].IS_inPath = false;
+            grid[i][j].neighbor = NULL;
+        }
+    }
+}
+
 void GRID_Free(cell_t **grid)
 {
     for (int i = 0; i < ROWS; i++)

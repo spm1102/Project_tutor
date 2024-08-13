@@ -27,7 +27,7 @@ bool INDEX_IsValid(int x, int y)
 void GUI_displayError(void)
 {
     BeginDrawing();
-    DrawRectangleRec((Rectangle){195, 195, 20, 20}, GRAY);
+    DrawRectangleRec((Rectangle){195, 195, 30, 30}, GRAY);
     DrawText("Find no path", 195, 195, 14, BLACK);
     EndDrawing();
 }
@@ -67,6 +67,10 @@ void GUI_findShortestPath(cell_t **grid)
     else if (IsKeyDown(KEY_A))
     {
         a_star_queue(p_graph, grid, source, dest, &GUI_displayPath);
+    }
+    else if(IsKeyDown(KEY_R))
+    {
+        GRID_Reset(grid);
     }
     int currentVertex = dest;
     while (currentVertex != source)
