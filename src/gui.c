@@ -112,23 +112,24 @@ void GUI_INIT(cell_t **grid)
         {
             isDrawingWalls = false;
         }
-
-        if (isDrawingWalls)
+        Vector2 mPos = GetMousePosition();
+        int inX = (int)mPos.x / cellWidth;
+        int inY = (int)mPos.y / cellHeight;
+        Rectangle bound;
+        bound.x = (float)(grid[inX][inY].x * cellWidth);
+        bound.y = (float)(grid[inX][inY].y * cellHeight);
+        bound.width = (float)cellWidth;
+        bound.height = (float)cellHeight;
+        if (isDrawingWalls && INDEX_IsValid(inX, inY) && CheckCollisionPointRec(mPos, bound))
         {
-            Vector2 mPos = GetMousePosition();
-            int inX = (int)mPos.x / cellWidth;
-            int inY = (int)mPos.y / cellHeight;
-            Rectangle bound;
-            bound.x = (float)(grid[inX][inY].x * cellWidth);
-            bound.y = (float)(grid[inX][inY].y * cellHeight);
-            bound.width = (float)cellWidth;
-            bound.height = (float)cellHeight;
-            if (INDEX_IsValid(inX, inY) && CheckCollisionPointRec(mPos, bound))
-            {
-                grid[inX][inY].IS_containWall = true;
-            }
+            grid[inX][inY].IS_containWall = true;
         }
-        else if (IsMouseButtonPressed(MOUSE_BUTTON_RIGHT))
+        else if (!isDrawingWalls && INDEX_IsValid(inX, inY) && CheckCollisionPointRec(mPos, bound) && IsKeyDown(KEY_D))
+        {
+            grid[inX][inY].IS_containWall = false;
+        }
+        
+        if (IsMouseButtonPressed(MOUSE_BUTTON_RIGHT))
         {
             Vector2 mPos2 = GetMousePosition();
             int inX = (int)mPos2.x / cellWidth;
