@@ -52,6 +52,17 @@ void GRID_Reset(cell_t **grid)
     }
 }
 
+void GRID_PATH_Reset(cell_t **grid) 
+{
+    for(int i = 0; i < ROWS; i++)
+    {
+        for(int j = 0; j < COLS; j++)
+        {
+            grid[i][j].IS_inPath = false;
+        }
+    }
+}
+
 void GRID_Free(cell_t **grid)
 {
     for (int i = 0; i < ROWS; i++)

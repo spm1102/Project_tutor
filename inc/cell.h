@@ -34,6 +34,7 @@ typedef struct cell_t cell_t;
 
 cell_t** GRID_Create(void);
 void GRID_Reset(cell_t **grid);
+void GRID_PATH_Reset(cell_t **grid);
 void GRID_Free(cell_t** grid);
 bool IS_wall(int x, int y, const cell_t** grid);
 int TAKE_source(const cell_t** grid);

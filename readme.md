@@ -4,6 +4,8 @@
   - Click right-hand mouse to choose source(red) and destination(blue). You can reset these point by clicking more than 2 times the right-hand mouse
   - Press the left-hand mouse to draw walls (yellow). If you want to delete walls, you can press `KEY_D` and move your mouse to the position of walls you want to delete.
   - Run the algorithms press\:
-    - `KEY_A` + `KEY_ENTER`\: A_Star algorithm
-    - `KEY_B` + `KEY_ENTER`\: BFS algorithm
-    - `KEY_D` + `KEY_ENTER`\: Dijkstra algorithm
+    - `KEY_ONE` + `KEY_ENTER`\: BFS algorithm
+    - `KEY_TWO` + `KEY_ENTER`\: Dijkstra algorithm
+    - `KEY_THREE` + `KEY_ENTER`\: A_Star algorithm
+  - To reset\: `KEY_R`+`KEY_ENTER`
+  - To delete previous found path\:`KEY_DELETE`

@@ -56,15 +56,15 @@ void GUI_findShortestPath(cell_t **grid)
     graph_t *p_graph = GEN_GRAPH_Create((const cell_t **)grid);
     int source = TAKE_source((const cell_t **)grid);
     int dest = TAKE_dest((const cell_t **)grid);
-    if (IsKeyDown(KEY_B))
+    if (IsKeyDown(KEY_ONE))
     {
         BFS(p_graph, grid, source, dest, &GUI_displayPath);
     }
-    else if (IsKeyDown(KEY_D))
+    else if (IsKeyDown(KEY_TWO))
     {
         dijkstra(p_graph, grid, source, dest, &GUI_displayPath);
     }
-    else if (IsKeyDown(KEY_A))
+    else if (IsKeyDown(KEY_THREE))
     {
         a_star_queue(p_graph, grid, source, dest, &GUI_displayPath);
     }
@@ -194,6 +194,9 @@ void GUI_INIT(cell_t **grid)
                     }
                 }
             }
+        }
+        if(IsKeyPressed(KEY_DELETE)) {
+            GRID_PATH_Reset(grid);
         }
         EndDrawing();
     }
