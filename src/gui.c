@@ -27,7 +27,7 @@ bool INDEX_IsValid(int x, int y)
 void GUI_displayError(void)
 {
     BeginDrawing();
-    DrawRectangleRec((Rectangle){195, 195, 30, 30}, GRAY);
+    DrawRectangleRec((Rectangle){180, 190, 110, 50}, GRAY);
     DrawText("Find no path", 195, 195, 14, BLACK);
     EndDrawing();
 }
@@ -73,13 +73,16 @@ void GUI_findShortestPath(cell_t **grid)
         GRID_Reset(grid);
     }
     int currentVertex = dest;
+    if (p_graph->vertices[currentVertex].preVertex == -1)
+    {   
+        while(!WindowShouldClose()){
+            GUI_displayError();
+        }
+        BeginDrawing();
+        return;
+    }
     while (currentVertex != source)
     {
-        if (p_graph->vertices[currentVertex].preVertex == -1)
-        {
-            GUI_displayError();
-            break;
-        }
         currentVertex = p_graph->vertices[currentVertex].preVertex;
         int j = currentVertex % 10;
         int i = (currentVertex - j) / 10;
