@@ -26,7 +26,6 @@ cell_t **GRID_Create(void)
             grid[i][j].IS_dest = false;
             grid[i][j].IS_source = false;
             grid[i][j].IS_inPath = false;
-            grid[i][j].neighbor = NULL;
         }
     }
     return grid;
@@ -47,7 +46,6 @@ void GRID_Reset(cell_t **grid)
             grid[i][j].IS_dest = false;
             grid[i][j].IS_source = false;
             grid[i][j].IS_inPath = false;
-            grid[i][j].neighbor = NULL;
         }
     }
 }

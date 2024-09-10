@@ -9,7 +9,6 @@
 #define ROWS 10
 #define NUM_VERTICES 100
 
-#define MAX_NEIGHBOR 4
 
 extern const int screenHeight;
 extern const int screenWidth;
@@ -27,7 +26,6 @@ struct cell_t
     bool IS_source;
     bool IS_dest;
     bool IS_inPath;
-    struct cell_t *neighbor;
 };
 
 typedef struct cell_t cell_t;

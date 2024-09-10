@@ -47,25 +47,27 @@ void GUI_displayPath(graph_t *p_graph, cell_t **grid)
             }
         }
     }
-
     BeginDrawing();
 }
 
-void GUI_findShortestPath(cell_t **grid)
+void GUI_findShortestPath(cell_t **grid, bool* isAlgorithmRunning)
 {
     graph_t *p_graph = GEN_GRAPH_Create((const cell_t **)grid);
     int source = TAKE_source((const cell_t **)grid);
     int dest = TAKE_dest((const cell_t **)grid);
     if (IsKeyDown(KEY_ONE))
     {
+        *isAlgorithmRunning = true;
         BFS(p_graph, grid, source, dest, &GUI_displayPath);
     }
     else if (IsKeyDown(KEY_TWO))
     {
+        *isAlgorithmRunning = true;
         dijkstra(p_graph, grid, source, dest, &GUI_displayPath);
     }
     else if (IsKeyDown(KEY_THREE))
     {
+        *isAlgorithmRunning = true;
         a_star_queue(p_graph, grid, source, dest, &GUI_displayPath);
     }
     else if(IsKeyDown(KEY_R))
@@ -73,7 +75,7 @@ void GUI_findShortestPath(cell_t **grid)
         GRID_Reset(grid);
     }
     int currentVertex = dest;
-    if (p_graph->vertices[currentVertex].preVertex == -1)
+    if (p_graph->vertices[currentVertex].preVertex == -1 && *isAlgorithmRunning == true)
     {   
         while(!WindowShouldClose()){
             GUI_displayError();
@@ -81,7 +83,7 @@ void GUI_findShortestPath(cell_t **grid)
         BeginDrawing();
         return;
     }
-    while (currentVertex != source)
+    while (currentVertex != source && p_graph->vertices[currentVertex].preVertex != -1)
     {
         currentVertex = p_graph->vertices[currentVertex].preVertex;
         int j = currentVertex % 10;
@@ -179,8 +181,8 @@ void GUI_INIT(cell_t **grid)
 
         if (IsKeyPressed(KEY_ENTER) && sourceX != -1 && sourceY != -1 && destX != -1 && destY != -1)
         {
-            isAlgorithmRunning = true;
-            GUI_findShortestPath(grid);
+            isAlgorithmRunning = false;
+            GUI_findShortestPath(grid, &isAlgorithmRunning);
         }
 
         if (isAlgorithmRunning)
