@@ -5,7 +5,7 @@ const int screenHeight = 400;
 
 const int cellWidth = screenWidth / COLS;
 const int cellHeight = screenHeight / ROWS;
-
+// Creating a map of 10x10 cells
 cell_t **GRID_Create(void)
 {
     cell_t** grid = (cell_t **)malloc(ROWS * sizeof(cell_t *));
@@ -30,7 +30,7 @@ cell_t **GRID_Create(void)
     }
     return grid;
 }
-
+// Reset grid to original condition
 void GRID_Reset(cell_t **grid)
 {
     int vertexCount = 0;
@@ -49,7 +49,7 @@ void GRID_Reset(cell_t **grid)
         }
     }
 }
-
+// Delete found path to carry out another algorithm
 void GRID_PATH_Reset(cell_t **grid) 
 {
     for(int i = 0; i < ROWS; i++)
@@ -78,7 +78,7 @@ bool IS_wall(int x, int y, const cell_t** grid)
     }
     return false;
 }
-
+// Get the source's coordinate
 int TAKE_source(const cell_t** grid)
 {
     int source;
@@ -95,7 +95,7 @@ int TAKE_source(const cell_t** grid)
     }
     return source;
 }
-
+//Get the destination's coordinate
 int TAKE_dest(const cell_t** grid)
 {
     int dest;

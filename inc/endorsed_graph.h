@@ -9,8 +9,8 @@
 
 struct edge_t
 {
-    int src;
-    int dest;
+    int src;               // the source node
+    int dest;              // the destination node
     int weight;
     struct edge_t *next;
 };
@@ -19,18 +19,18 @@ typedef struct edge_t edge_t;
 
 struct vertex_t
 {
-    int x, y;
+    int x, y;               //coordinate of node
     int visited;
-    double heuristic_dist;
-    double total_dist;
-    int preVertex;
+    double heuristic_dist;  // heuristic dist to the destination
+    double total_dist;      //distance to the source
+    int preVertex;          //the previous node
     edge_t *edge;
 };
 typedef struct vertex_t vertex_t;
 
 struct graph_t
 {
-    int numVertices;
+    int numVertices;        //the number of nodes
     vertex_t vertices[MAX_VERTICES];
 };
 

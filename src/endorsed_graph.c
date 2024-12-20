@@ -30,7 +30,7 @@ graph_t *GRAPH_Create(const cell_t **grid)
 
     return p_graph;
 }
-
+// Calculate distance between nodes
 double distance_measure(graph_t *p_graph, int source, int dest)
 {
     int xSRC = p_graph->vertices[source].x;
@@ -59,7 +59,7 @@ void GRAPH_Free(graph_t *p_graph)
 
     free(p_graph);
 }
-
+// Use double linked list as edge between 2 nodes
 void EDGE_Add(graph_t *p_graph, int src, int dest, int weight)
 {
     edge_t *p_edge_src = (edge_t *)malloc(sizeof(edge_t));

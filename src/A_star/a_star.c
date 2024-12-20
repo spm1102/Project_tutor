@@ -19,7 +19,7 @@ void a_star_queue(graph_t *p_graph, cell_t** grid, int startVertex, int destinat
 
         p_graph->vertices[currentVertex].visited = 1;
         GUI_displaypPath(p_graph, grid);
-
+        //Put all the adjacent nodes into the priority queue following to their distance to the source + the heuristic distance to the destination
         edge_t *temp = p_graph->vertices[currentVertex].edge;
         while (temp != NULL)
         {

@@ -3,7 +3,9 @@ void dijkstra(graph_t *p_graph, cell_t **grid, int startVertex, int destination,
 {
     DIJKSTRA_queue_t *p_queue = NULL;
     p_queue = DIJKSTRA_QUEUE_Create();
+    //Set the distance to the source of startVertex
     p_graph->vertices[startVertex].total_dist = 0;
+    //Put the source node to queue
     DIJKSTRA_QUEUE_Put(p_queue, startVertex, 0);
     while (p_queue->front != NULL)
     {
@@ -28,9 +30,11 @@ void dijkstra(graph_t *p_graph, cell_t **grid, int startVertex, int destination,
         {
             int nextVertex = temp->dest;
             int weight = temp->weight;
-
+            //Priority queue ( the nearer the node is to the source, the more likely it is to the front of the queue)
             if (!p_graph->vertices[nextVertex].visited)
             {
+                //Arrange checked nodes into order
+                //They are arranged following to thri distane to the source node
                 int new_dist = p_graph->vertices[currentVertex].total_dist + weight;
                 if (new_dist < p_graph->vertices[nextVertex].total_dist)
                 {
