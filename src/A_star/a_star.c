@@ -8,9 +8,9 @@ void a_star_queue(graph_t *p_graph, cell_t** grid, int startVertex, int destinat
     A_STAR_QUEUE_Put(p_queue, startVertex, 0, p_graph);
     while (p_queue->front != NULL)
     {
-        node_heap_t *minNode = A_STAR_QUEUE_Get(p_queue, p_graph);
+        A_STAR_node_t *minNode = A_STAR_QUEUE_Get(p_queue, p_graph);
         int currentVertex = minNode->vertexName;
-        NODE_HEAP_Free(minNode);
+        A_STAR_NODE_Free(minNode);
 
         if (currentVertex == destination)
         {

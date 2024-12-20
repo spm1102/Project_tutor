@@ -1,8 +1,8 @@
 #include "a_star_node.h"
 
-node_heap_t *NODE_HEAP_Create(int vertex, double dist, double heuristic_dist)
+A_STAR_node_t *A_STAR_NODE_Create(int vertex, double dist, double heuristic_dist)
 {
-    node_heap_t *p_node_heap = (node_heap_t *)malloc(sizeof(node_heap_t));
+    A_STAR_node_t *p_node_heap = (A_STAR_node_t *)malloc(sizeof(A_STAR_node_t));
     if (!p_node_heap)
     {
         return NULL;
@@ -16,7 +16,7 @@ node_heap_t *NODE_HEAP_Create(int vertex, double dist, double heuristic_dist)
     return p_node_heap;
 }
 
-void NODE_HEAP_Free(node_heap_t *p_node_heap)
+void A_STAR_NODE_Free(A_STAR_node_t *p_node_heap)
 {
     free(p_node_heap);
 }

@@ -12,7 +12,7 @@ A_STAR_queue_t *A_STAR_QUEUE_Create(void)
 void A_STAR_QUEUE_Put(A_STAR_queue_t *p_queue, int vertex, double dist, graph_t *p_graph)
 {
     double heuristic_dist = p_graph->vertices[vertex].heuristic_dist;
-    node_heap_t *p_node = NODE_HEAP_Create(vertex, dist, heuristic_dist);
+    A_STAR_node_t *p_node = A_STAR_NODE_Create(vertex, dist, heuristic_dist);
     if (p_queue->front == NULL || dist + heuristic_dist < p_queue->front->total_dist + p_queue->front->heuristic_dist)
     {
         p_node->next = p_queue->front;
@@ -20,8 +20,8 @@ void A_STAR_QUEUE_Put(A_STAR_queue_t *p_queue, int vertex, double dist, graph_t 
     }
     else
     {
-        node_heap_t *curr = p_queue->front;
-        node_heap_t *pre = NULL;
+        A_STAR_node_t *curr = p_queue->front;
+        A_STAR_node_t *pre = NULL;
         while (curr != NULL && dist + heuristic_dist >= curr->total_dist + curr->heuristic_dist)
         {
             pre = curr;
@@ -32,15 +32,15 @@ void A_STAR_QUEUE_Put(A_STAR_queue_t *p_queue, int vertex, double dist, graph_t 
     }
 }
 
-node_heap_t *A_STAR_QUEUE_Get(A_STAR_queue_t *p_queue, graph_t *p_graph)
+A_STAR_node_t *A_STAR_QUEUE_Get(A_STAR_queue_t *p_queue, graph_t *p_graph)
 {
     if (p_queue->front == NULL)
     {
         return NULL;
     }
     int vertex = p_queue->front->vertexName;
-    node_heap_t *p_node = NODE_HEAP_Create(vertex, p_queue->front->total_dist, p_graph->vertices[vertex].heuristic_dist);
-    node_heap_t *temp = p_queue->front;
+    A_STAR_node_t *p_node = A_STAR_NODE_Create(vertex, p_queue->front->total_dist, p_graph->vertices[vertex].heuristic_dist);
+    A_STAR_node_t *temp = p_queue->front;
     p_queue->front = p_queue->front->next;
 
     if (p_queue->front == NULL)
@@ -48,7 +48,7 @@ node_heap_t *A_STAR_QUEUE_Get(A_STAR_queue_t *p_queue, graph_t *p_graph)
         p_queue->rear = NULL;
     }
 
-    NODE_HEAP_Free(temp);
+    A_STAR_NODE_Free(temp);
     return p_node;
 }
 

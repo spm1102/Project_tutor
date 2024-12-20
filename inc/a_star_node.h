@@ -1,20 +1,20 @@
-#ifndef NODE_HEAP_H
-#define NODE_HEAP_H
+#ifndef A_STAR_NODE__H
+#define A_STAR_NODE__H
 
 #include "GRAPH_GEN.h"
 
-struct node_heap_t
+struct A_STAR_node_t
 {
     int vertexName;
     double real_dist;
     double heuristic_dist;
     double total_dist;
-    struct node_heap_t *next;
+    struct A_STAR_node_t *next;
 };
 
-typedef struct node_heap_t node_heap_t;
+typedef struct A_STAR_node_t A_STAR_node_t;
 
-node_heap_t *NODE_HEAP_Create(int vertex, double dist, double heuristic_dist);
-void NODE_HEAP_Free(node_heap_t *p_node_heap);
+A_STAR_node_t *A_STAR_NODE_Create(int vertex, double dist, double heuristic_dist);
+void A_STAR_NODE_Free(A_STAR_node_t *p_node_heap);
 
 #endif

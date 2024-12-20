@@ -71,6 +71,7 @@
     "gui.h": "c",
     "cell.h": "c",
     "dijkstra_node.h": "c",
-    "dijkstra.h": "c"
+    "dijkstra.h": "c",
+    "bfs_node.h": "c"
   }
 }
